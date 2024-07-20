@@ -1,0 +1,56 @@
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27853.11000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.01000000"}
+__main__ - INFO - Spot account balance for USDT before opening position: {"asset": "USDT", "free": "16.82562820", "locked": "0.00000000"}
+__main__ - INFO - Transfer to margin amount: {"tranId": 143963357790, "clientTag": ""}
+__main__ - INFO - Loan response: {"tranId": 143963357954, "clientTag": ""}
+__main__ - INFO - Loan conversion to USDT response: {"symbol": "ETHUSDT", "orderId": 14308351070, "clientOrderId": "vIjNsdu4PLZsuh4IScV3Sv", "transactTime": 1696279052504, "price": "0", "origQty": "0.006", "executedQty": "0.006", "cummulativeQuoteQty": "10.008", "status": "FILLED", "timeInForce": "GTC", "type": "MARKET", "side": "SELL", "fills": [{"price": "1668", "qty": "0.006", "commission": "0.010008", "commissionAsset": "USDT", "tradeId": 1203809727}], "isIsolated": true, "selfTradePreventionMode": "NONE"}
+__main__ - INFO - Long order response: {"symbol": "BTCUSDT", "orderId": 22565484923, "orderListId": -1, "clientOrderId": "2A4GjDjfIFwOjknIQZ5i4o", "transactTime": 1696279052872, "price": "0.00000000", "origQty": "0.00040000", "executedQty": "0.00040000", "cummulativeQuoteQty": "11.14124800", "status": "FILLED", "timeInForce": "GTC", "type": "MARKET", "side": "BUY", "workingTime": 1696279052872, "fills": [{"price": "27853.12000000", "qty": "0.00040000", "commission": "0.00000040", "commissionAsset": "BTC", "tradeId": 3226542992}], "selfTradePreventionMode": "NONE"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27855.70000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.01000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27850.10000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.00000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27848.71000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.00000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27859.35000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.45000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27864.34000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.55000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27845.99000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.93000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27840.68000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.80000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27829.16000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1666.80000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27835.00000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1666.78000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27835.00000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1666.87000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27859.44000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.42000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27846.00000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.29000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27841.19000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.00000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27853.50000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.67000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27844.18000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.14000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27864.71000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1668.32000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27853.18000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.50000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27854.35000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1667.26000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27832.21000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1665.81000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27828.19000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1665.06000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27829.71000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1665.09000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27838.91000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1665.09000000"}
+__main__ - INFO - Data BTC: {"symbol": "BTCUSDT", "price": "27828.01000000"}
+__main__ - INFO - Data ETH: {"symbol": "ETHUSDT", "price": "1664.09000000"}
+__main__ - INFO - Isolated account before closing ETHUSDT: {'assets': [{'baseAsset': {'asset': 'ETH', 'borrowEnabled': True, 'borrowed': '0.006', 'free': '0', 'interest': '0.00000002', 'locked': '0', 'netAsset': '-0.00600002', 'netAssetOfBtc': '-0.00035885', 'repayEnabled': True, 'totalAsset': '0'}, 'quoteAsset': {'asset': 'USDT', 'borrowEnabled': True, 'borrowed': '0', 'free': '14.997992', 'interest': '0', 'locked': '0', 'netAsset': '14.997992', 'netAssetOfBtc': '0.00053899', 'repayEnabled': True, 'totalAsset': '14.997992'}, 'symbol': 'ETHUSDT', 'isolatedCreated': True, 'marginLevel': '1.5018841', 'marginLevelStatus': 'EXCESSIVE', 'marginRatio': '10', 'indexPrice': '1664.34746835', 'liquidatePrice': '2380.62571537', 'liquidateRate': '43.036581', 'tradeEnabled': True, 'enabled': True}]}
+__main__ - INFO - Repay loan response: {"symbol": "ETHUSDT", "orderId": 14308449251, "clientOrderId": "Qz40ovT27qMoWFxO9UCplD", "transactTime": 1696280446029, "price": "0", "origQty": "0.006", "executedQty": "0.006", "cummulativeQuoteQty": "9.9846", "status": "FILLED", "timeInForce": "GTC", "type": "MARKET", "side": "BUY", "fills": [{"price": "1664.1", "qty": "0.006", "commission": "0.000006", "commissionAsset": "ETH", "tradeId": 1203815946}], "isIsolated": true, "selfTradePreventionMode": "NONE"}
+__main__ - INFO - Close long position response: {"symbol": "BTCUSDT", "orderId": 22565638417, "orderListId": -1, "clientOrderId": "L3UMW9rjZX1gAbgHmM5OXl", "transactTime": 1696280446227, "price": "0.00000000", "origQty": "0.00040000", "executedQty": "0.00040000", "cummulativeQuoteQty": "11.13120000", "status": "FILLED", "timeInForce": "GTC", "type": "MARKET", "side": "SELL", "workingTime": 1696280446227, "fills": [{"price": "27828.00000000", "qty": "0.00040000", "commission": "0.01113120", "commissionAsset": "USDT", "tradeId": 3226553471}], "selfTradePreventionMode": "NONE"}
