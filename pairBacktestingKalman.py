@@ -89,17 +89,8 @@ def backtestKalman(initial_train_df1, initial_train_df2, test_df1, test_df2, ma_
 
     reg_slope = linearRegressionSlope(
         initial_train_df1.iloc[:, 4], initial_train_df2.iloc[:, 4])
-    # for i in range(0, len(initial_train_df1), window_time):
-    #     theta = linearRegressionSlope(initial_train_df1.iloc[i:i+window_time, 4], initial_train_df2.iloc[i:i+window_time, 4]).slope
-    #     theta, P = kalmanUpdate(np.array(initial_train_df1.iloc[i:i+window_time, 4]).reshape(
-    #         window_time, 1), np.array(initial_train_df2.iloc[i:i+window_time, 4]).reshape(window_time, 1), theta, P, W, sigma_e, window_time)
-    # mean, cov = kf.filter_update(mean, cov, observation=initial_train_df2.iloc[i, 4], observation_matrix=np.array(
-    #     initial_train_df1.iloc[i, 4]))
-    # online_regression.update(
-    #     np.array(initial_train_df1.iloc[i, 4]), initial_train_df2.iloc[i, 4])
-
-    # ma1 = list(df1.iloc[:, 4])
-    # ma2 = list(df2.iloc[:, 4])
+    
+    # Trading States
     position = 0
     returns, percentage_returns = [], []
     is_open = False
@@ -118,25 +109,16 @@ def backtestKalman(initial_train_df1, initial_train_df2, test_df1, test_df2, ma_
         price2 = test_df2.iloc[i, 1]
         print("Original prices", price1, price2)
 
-        # online_regression.update(np.array(price1), price2)
-        # reg_slope = (online_regression.coefficients)[0]
-
-        # mean, cov = kf.filter_update(
-        #     mean, cov, observation=price2, observation_matrix=np.array(price1))
+        # Checking Kalman update condition 
         if i % window_time == 0 and i + window_time < len(test_df1):
             print("Updating Kalman Filter")
-            # theta = linearRegressionSlope(
-            #     test_df1.iloc[i:i+window_time, 4], test_df2.iloc[i:i+window_time, 4])
             theta, P, S = kalmanUpdate(np.array(test_df1.iloc[i-window_time:i, 4]).reshape(
                 window_time, 1), np.array(test_df2.iloc[i-window_time:i, 4]).reshape(window_time, 1), theta, P, W, sigma_e, window_time)
-        #     print(theta, P)
 
             res_covariance = S[0][0]
 
-            # reg_slope = theta
             prev_slope = reg_slope
             reg_slope = theta[0][0]
-        # print(reg_slope)
 
         if stop_trading:
             stop_trading_days += 1
@@ -151,7 +133,6 @@ def backtestKalman(initial_train_df1, initial_train_df2, test_df1, test_df2, ma_
                 (price1 - open1) + position*(open2 - price2)
             cum_slope_diff += (reg_slope - prev_slope)
             open_time += 1
-            # if open_time == waiting_time or np.abs(cum_slope_diff) > slope_diff_threshold:
             if np.abs(cum_slope_diff) > slope_diff_threshold:
                 # if open_time == waiting_time:
                 print("##############\nClose position", i)
@@ -185,6 +166,7 @@ def backtestKalman(initial_train_df1, initial_train_df2, test_df1, test_df2, ma_
                 price1, price2, reg_slope, lower_bound, upper_bound, mean)
         print(current_state)
 
+        # Checking for Opening and Closing conditions
         if current_state == 2 and position == 0:
             print("##############\nAbove line Open", i)
             # short ETH, long BTC
@@ -259,77 +241,14 @@ if __name__ == "__main__":
             "pair_analysis_data/minute/BTCUSDT-1m-2021-09.csv", header=None),
         pd.read_csv(
             "pair_analysis_data/minute/BTCUSDT-1m-2021-10.csv", header=None)], ignore_index=True)
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-03.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-04.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-05.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-06.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-07.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-08.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-09.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-10.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-11.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/BTCUSDT-1m-2020-12.csv", header=None)], ignore_index=True)
+
     initial_train_df2 = pd.concat([
         pd.read_csv(
             "pair_analysis_data/minute/ETHUSDT-1m-2021-09.csv", header=None),
         pd.read_csv(
             "pair_analysis_data/minute/ETHUSDT-1m-2021-10.csv", header=None)], ignore_index=True)
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-03.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-04.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-05.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-06.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-07.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-08.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-09.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-10.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-11.csv", header=None),
-    # pd.read_csv("pair_analysis_data/minute/ETHUSDT-1m-2020-12.csv", header=None)], ignore_index=True)
 
     test_df1 = pd.concat([
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-01.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-02.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-03.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-04.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-05.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-06.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-07.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-08.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-09.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-10.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-11.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2020-12.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-01.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-02.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-03.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-04.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-05.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-06.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-07.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/BTCUSDT-1m-2021-08.csv", header=None),
-        pd.read_csv(
-            "pair_analysis_data/minute/BTCUSDT-1m-2021-09.csv", header=None),
-        pd.read_csv(
-            "pair_analysis_data/minute/BTCUSDT-1m-2021-10.csv", header=None),
         pd.read_csv(
             "pair_analysis_data/minute/BTCUSDT-1m-2021-11.csv", header=None),
         pd.read_csv(
@@ -375,50 +294,6 @@ if __name__ == "__main__":
     ], ignore_index=True)
 
     test_df2 = pd.concat([
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-01.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-02.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-03.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-04.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-05.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-06.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-07.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-08.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-09.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-10.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-11.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2020-12.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-01.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-02.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-03.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-04.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-05.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-06.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-07.csv", header=None),
-        # pd.read_csv(
-        #     "pair_analysis_data/minute/ETHUSDT-1m-2021-08.csv", header=None),
-        pd.read_csv(
-            "pair_analysis_data/minute/ETHUSDT-1m-2021-09.csv", header=None),
-        pd.read_csv(
-            "pair_analysis_data/minute/ETHUSDT-1m-2021-10.csv", header=None),
         pd.read_csv(
             "pair_analysis_data/minute/ETHUSDT-1m-2021-11.csv", header=None),
         pd.read_csv(
@@ -473,32 +348,6 @@ if __name__ == "__main__":
     stop_loss = 200
     start_trading_threshold = 50
 
-    # # Initialize online linear regression
-    # num_features = 1
-    # online_regression = OnlineLinearRegression(num_features=num_features)
-
-    # # Initialize Kalman Filter
-    # measurement_noise_std = 1.0
-    # num_features = 1
-    # # Initial estimate of the coefficients
-    # initial_state_mean = np.zeros(num_features)
-    # initial_state_covariance = np.eye(num_features)
-    # # State transition matrix (identity for online update)
-    # transition_matrix = np.eye(num_features)
-    # observation_matrix = np.eye(num_features)  # Observation matrix
-    # # Measurement noise covariance matrix
-    # observation_covariance = np.eye(num_features)
-    # # Process noise covariance matrix
-    # transition_covariance = np.eye(num_features)
-
-    # kf = KalmanFilter(
-    #     initial_state_mean=initial_state_mean,
-    #     initial_state_covariance=initial_state_covariance,
-    #     transition_matrices=transition_matrix,
-    #     observation_matrices=observation_matrix,
-    #     observation_covariance=observation_covariance,
-    #     transition_covariance=transition_covariance,
-    # )
 
     returns, open_times, close_durations, percentage_returns = backtestKalman(
         initial_train_df1, initial_train_df2, test_df1, test_df2, ma_window_size, lower_bound, upper_bound, window_time, waiting_time, slope_diff_threshold, stop_loss, start_trading_threshold)
@@ -516,20 +365,3 @@ if __name__ == "__main__":
     percentage_returns = percentage_returns * 100
 
     print("Sharpe Ratio", calSharpeRatio(percentage_returns))
-
-    # Write continual training code. Two hyperparameters - (1) how many months to consider for training - should be small (2-3 months),
-    # (2) Waiting time, after which we need to retrain the regression line.
-    # Let's calculate sharpe ratio and returns for all 3 years of data with this strategy.
-
-    # Try the same algorithm with exponential-MA instead of normal MA.
-
-    # plt.xticks(np.arange(0, len(spreads), 30))
-
-    # plt.plot([spread for spread in spreads])
-    # plt.plot([y_ub for y_ub in plot_ub])
-    # plt.plot([y_lb for y_lb in plot_lb])
-    # plt.plot([res_std for res_std in res_stds])
-    # # plt.plot(plot_lb, linestyle="dotted")
-    # # plt.plot(plot_ub, linestyle="dotted")
-
-    # plt.show()
